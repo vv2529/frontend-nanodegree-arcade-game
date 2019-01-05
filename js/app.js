@@ -87,6 +87,10 @@ const allEnemies = [
 	new Enemy(-100, 220, 400)
 ];
 
+/*
+ * Events
+ */
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e){
@@ -100,7 +104,23 @@ document.addEventListener('keyup', function(e){
 	player.handleInput(allowedKeys[e.keyCode]);
 });
 
-// Helper functions
+const skinBox = getId('skin-box');
+
+getId('btn-change-skin').addEventListener('click', () => {
+	skinBox.classList.toggle('hidden');
+});
+
+getId('skin-box').addEventListener('click', (event) => {
+	const elem = event.target;
+	if(elem.nodeName != 'IMG') return;
+	// Directly changing player.sprite doesn't seem to work :(
+	player.sprite = 'images' + elem.src.slice(elem.src.lastIndexOf('/'));
+});
+
+/*
+ * Helper functions
+ */
+
 function random(to = 2, from = 0){
 	return Math.floor(Math.random() * (to-from)) + from;
 }
