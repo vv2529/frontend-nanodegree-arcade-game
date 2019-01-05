@@ -3,7 +3,6 @@ var Entity = function(x, y){
 	this.x = x;
 	this.y = y;
 }
-// Draw the enemy on the screen, required method for game
 Entity.prototype.render = function(){
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -11,11 +10,6 @@ Entity.prototype.render = function(){
 // Enemies our player must avoid
 var Enemy = function(x, y, speed){
 	Entity.call(this, x, y);
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
 	this.speed = speed;
 };
 Enemy.prototype = Object.create(Entity.prototype);
@@ -25,30 +19,13 @@ Enemy.prototype = Object.assign(Enemy.prototype, {
 	sprite: 'images/enemy-bug.png',
 	width: 98,
 	height: 66,
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
 	update: function(dt){
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
 		this.x += this.speed * dt;
 
 		// Get an enemy back on track when it is gone
 		if(this.x > 800) this.restart();
 
-		// Check for collision; extra variables for less code
-
-		/*const x = this.x, y = this.y, px = player.x, py = player.y,
-		w = this.width, h = this.height, pw = player.width, ph = player.height;
-		if(((x - px) * (x + w - px) < 0) ||
-			((x - px + pw) * (x + w - px + pw) < 0) &&
-			((y - py) * (y + w - py) < 0) ||
-			((y - py + pw) * (y + w - py + pw) < 0))*/
-
-		/*if((((this.x - player.x) * (this.x + this.width - player.x) < 0) ||
-					((this.x - player.x + player.width) * (this.x + this.width - player.x + player.width) < 0)) &&
-			(((this.y - player.y) * (this.y + this.height - player.y) < 0) ||
-						((this.y - player.y + player.height) * (this.y + this.height - player.y + player.height) < 0)))*/
+		// Check for collision
 		if((((this.x > player.x) && (this.x < player.x + player.width)) ||
 			((this.x + this.width > player.x) && (this.x + this.width < player.x + player.width))) &&
 			(((this.y > player.y) && (this.y < player.y + player.height)) ||
@@ -62,11 +39,7 @@ Enemy.prototype = Object.assign(Enemy.prototype, {
 	}
 });
 
-
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// Player class
 var Player = function(x, y){
 	Entity.call(this, x, y);
 }
@@ -104,8 +77,6 @@ Player.prototype = Object.assign(Player.prototype, {
 });
 
 // Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
 const player = new Player(200, 400);
 const allEnemies = [
 	new Enemy(100, 60, 200),
