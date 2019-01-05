@@ -71,6 +71,9 @@ Player.prototype = Object.assign(Player.prototype, {
 	},
 	restart: function(msg){
 		console.log(msg+'!');
+		if(msg == 'win') getId('wins').textContent++;
+		else if(msg == 'lose') getId('losses').textContent++;
+
 		this.x = 200;
 		this.y = 400;
 	}
@@ -101,3 +104,4 @@ document.addEventListener('keyup', function(e){
 function random(to = 2, from = 0){
 	return Math.floor(Math.random() * (to-from)) + from;
 }
+function getId(id){return document.getElementById(id)}

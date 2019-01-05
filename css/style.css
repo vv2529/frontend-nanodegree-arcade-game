@@ -1,3 +1,22 @@
 body {
-    text-align: center;
+	text-align: center;
+}
+.scoreboard {
+	margin: 30px 0 0;
+}
+.score {
+	display: inline-block;
+	width: 175px;
+	margin: 0 50px;
+	font: bold 30px/1 sans-serif;
+}
+.wins {
+	color: #030;
+	background: #090;
+	box-shadow: 0 0 20px 20px #090;
+}
+.losses {
+	color: #500;
+	background: #d00;
+	box-shadow: 0 0 20px 20px #d00;
 }
